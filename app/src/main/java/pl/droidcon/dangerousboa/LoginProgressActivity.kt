@@ -28,7 +28,7 @@ class LoginProgressActivity : AppCompatActivity() {
         if (RelayrSdk.isUserLoggedIn()) {
             RelayrSdk.getUser().observeOn(AndroidSchedulers.mainThread()).subscribe {
                 RelayrSdk.getUserApi().getDevices(it.id).subscribe { devices ->
-                    devices.forEach {
+                    devices.filter { it.name == "light" }.forEach {
                         it.subscribeToCloudReadings()
                                 .doOnNext { Log.e("tag", "value: " + it) }
                                 .filter { it.meaning == "proximity" }
@@ -45,7 +45,7 @@ class LoginProgressActivity : AppCompatActivity() {
                     }
                 }
             }
-            handler.postDelayed(openMusic, 10000)
+            //handler.postDelayed(openMusic, 10000)
         }
     }
 }
