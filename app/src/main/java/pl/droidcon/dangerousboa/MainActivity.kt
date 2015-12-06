@@ -1,12 +1,17 @@
 package pl.droidcon.dangerousboa
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Toast.makeText(this, "Hello world!", Toast.LENGTH_SHORT).show()
+        setContentView(R.layout.splash)
+        Handler().postDelayed({
+            startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+            finish()
+        }, 2000)
     }
 }
