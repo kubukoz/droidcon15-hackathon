@@ -27,7 +27,7 @@
             android:name=".HomeActivity"
             android:label="@string/app_name" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".LoginProgressActivity" />
+        <activity android:name=".LoginProgressActivity" android:label="Login!" />
         <activity
             android:name=".SoundPreferencesActivity"
             android:label="Preferences" />
