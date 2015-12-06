@@ -5,7 +5,9 @@ import android.preference.PreferenceManager
 import com.google.gson.Gson
 import java.util.*
 
-class SoundPrefs(var rock: Boolean, var electro: Boolean, var classical: Boolean, var rap: Boolean)
+class SoundPrefs(var rock: Boolean, var electro: Boolean, var classical: Boolean, var rap: Boolean) {
+    fun asList() = listOf(rock, electro, classical, rap)
+}
 
 fun Context.soundPrefs(): SoundPrefs {
     val json = PreferenceManager.getDefaultSharedPreferences(this).getString("soundPrefs", null)

@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.os.UserManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.firebase.client.DataSnapshot
+import com.firebase.client.Firebase
+import com.firebase.client.FirebaseError
+import com.firebase.client.ValueEventListener
 
 class MusicActivity : AppCompatActivity() {
     var selectedSong = 0
@@ -21,6 +25,20 @@ class MusicActivity : AppCompatActivity() {
 
         player.setVolume(1f, 1f)
         player.start()
+
+        val firebase = Firebase("https://incandescent-inferno-5098.firebaseio.com/users")
+        firebase.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(data: DataSnapshot) {
+                val allUsersPrefs = data.children.map {
+                    val list = it.value as List<Boolean>
+                    SoundPrefs(list[0], list[1], list[2], list[3])
+                }
+            }
+
+            override fun onCancelled(error: FirebaseError) {
+            }
+        })
+        firebase.updateChildren(mapOf(userId to soundPrefs().asList()))
     }
 
     fun getSong() = when (selectedSong) {
