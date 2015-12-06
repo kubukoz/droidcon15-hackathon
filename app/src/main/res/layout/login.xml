@@ -11,10 +11,4 @@
         android:layout_height="wrap_content"
         android:text="Login now!" />
 
-    <Button
-        android:id="@+id/login_prefs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change your preferences" />
-
 </LinearLayout>
