@@ -21,6 +21,11 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -30,6 +35,7 @@ dependencies {
     compile 'io.relayr:android-sdk:1.0.2'
     compile 'io.relayr:java-sdk:1.0.6'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.firebase:firebase-client-android:2.4.1'
 }
 buildscript {
     ext.kotlin_version = '1.0.0-beta-3595'

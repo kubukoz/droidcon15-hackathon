@@ -8,6 +8,7 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
+        android:name=".SoundCrowdApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -23,6 +24,8 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name" />
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginProgressActivity"/>
         <activity
             android:name=".SoundPreferencesActivity"
             android:label="Preferences" />
