@@ -12,7 +12,7 @@ val Context.userId: String get() {
         return userId
     } else {
         val new = UUID.randomUUID().toString()
-        sharedPrefs.edit().putString("userId", new)
+        sharedPrefs.edit().putString("userId", new).apply()
         return new
     }
 }
