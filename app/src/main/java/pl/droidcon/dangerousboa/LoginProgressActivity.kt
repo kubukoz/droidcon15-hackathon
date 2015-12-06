@@ -18,6 +18,11 @@ class LoginProgressActivity : AppCompatActivity() {
             RelayrSdk.logIn(this)
     }
 
+    val handler = Handler()
+    val openMusic = Runnable {
+        startActivity(Intent(this, MusicActivity::class.java))
+    }
+
     override fun onResume() {
         super.onResume()
         if (RelayrSdk.isUserLoggedIn()) {
@@ -25,20 +30,22 @@ class LoginProgressActivity : AppCompatActivity() {
                 RelayrSdk.getUserApi().getDevices(it.id).subscribe { devices ->
                     devices.forEach {
                         it.subscribeToCloudReadings()
+                                .doOnNext { Log.e("tag", "value: " + it) }
+                                .filter { it.meaning == "proximity" }
                                 .map { it.value as Double }
-                                //                            .filter { it > 1 }
+                                .filter { it > 200 }
+                                .take(1)
                                 .subscribe({
                                     Log.e("tag", "value: " + it)
                                     startActivity(Intent(this, MusicActivity::class.java))
+                                    handler.removeCallbacks(openMusic)
                                 }, {
                                     Log.e("tag", "error", it)
                                 })
                     }
                 }
             }
-            Handler().postDelayed({
-                startActivity(Intent(this, MusicActivity::class.java))
-            }, 10000)
+            handler.postDelayed(openMusic, 10000)
         }
     }
 }
