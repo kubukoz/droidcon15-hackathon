@@ -3,19 +3,10 @@ package pl.droidcon.dangerousboa
 import android.app.Activity
 import android.os.Bundle
 import android.widget.CheckBox
-import java.util.*
 
 class SoundPreferencesActivity : Activity() {
 
-    val prefs: SoundPrefs by lazy {
-        var data = soundPrefs()
-        if (data == null) {
-            val r = Random()
-            data = SoundPrefs(r.nextBoolean(), r.nextBoolean(), r.nextBoolean(), r.nextBoolean())
-            setSoundPrefs(data)
-        }
-        data!!
-    }
+    val prefs: SoundPrefs by lazy { soundPrefs() }
 
     val pref1 by lazy { findViewById(R.id.sound_preference_1) as CheckBox }
     val pref2 by lazy { findViewById(R.id.sound_preference_2) as CheckBox }
