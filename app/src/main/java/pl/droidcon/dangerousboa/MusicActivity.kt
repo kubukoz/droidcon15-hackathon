@@ -46,15 +46,15 @@ class MusicActivity : AppCompatActivity() {
         val raps = prefs.sumBy { if (it.rap) 1 else 0 }
         val rocks = prefs.sumBy { if (it.rock) 1 else 0 }
 
-        val results = listOf(classicals, electros, raps, rocks)
+        val results = listOf(rocks, electros, classicals, raps)
         return (results zip results.indices).maxBy { it.first }!!.second
     }
 
     fun getSong() = when (selectedSong) {
-        0 -> R.raw.classical
+        0 -> R.raw.rock
         1 -> R.raw.electro
-        2 -> R.raw.rap
-        else -> R.raw.rock
+        2 -> R.raw.classical
+        else -> R.raw.rap
     }
 
     override fun onDestroy() {
