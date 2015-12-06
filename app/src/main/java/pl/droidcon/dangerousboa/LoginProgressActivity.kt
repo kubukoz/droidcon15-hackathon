@@ -2,6 +2,7 @@ package pl.droidcon.dangerousboa
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import io.relayr.android.RelayrSdk
@@ -19,7 +20,7 @@ class LoginProgressActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (RelayrSdk.isUserLoggedIn())
+        if (RelayrSdk.isUserLoggedIn()) {
             RelayrSdk.getUser().observeOn(AndroidSchedulers.mainThread()).subscribe {
                 RelayrSdk.getUserApi().getDevices(it.id).subscribe { devices ->
                     devices.forEach {
@@ -35,5 +36,9 @@ class LoginProgressActivity : AppCompatActivity() {
                     }
                 }
             }
+            Handler().postDelayed({
+                startActivity(Intent(this, MusicActivity::class.java))
+            }, 10000)
+        }
     }
 }
