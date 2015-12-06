@@ -14,8 +14,6 @@ import com.firebase.client.ValueEventListener
 class MusicActivity : AppCompatActivity() {
     var selectedSong = 0
 
-    val player by lazy { MediaPlayer.create(this, getSong()) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(200)
@@ -30,12 +28,13 @@ class MusicActivity : AppCompatActivity() {
                     val list = it.value as List<Boolean>
                     SoundPrefs(list[0], list[1], list[2], list[3])
                 })
-
+                val player = MediaPlayer.create(this@MusicActivity, getSong())
                 player.setVolume(1f, 1f)
                 player.start()
             }
 
-            override fun onCancelled(error: FirebaseError) { }
+            override fun onCancelled(error: FirebaseError) {
+            }
         })
         firebase.updateChildren(mapOf(userId to soundPrefs().asList()))
     }
@@ -55,10 +54,5 @@ class MusicActivity : AppCompatActivity() {
         1 -> R.raw.electro
         2 -> R.raw.classical
         else -> R.raw.rap
-    }
-
-    override fun onDestroy() {
-        player.stop()
-        super.onDestroy()
     }
 }
