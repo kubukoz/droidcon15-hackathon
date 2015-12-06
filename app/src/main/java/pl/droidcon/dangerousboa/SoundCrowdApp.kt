@@ -7,6 +7,6 @@ class SoundCrowdApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Firebase.setAndroidContext(this);
+        Firebase.setAndroidContext(this)
     }
 }
